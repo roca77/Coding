@@ -1,0 +1,56 @@
+<!doctype html>
+<html>
+<head>
+    <title> Returning functions from a function </title>
+    <meta charset="utf-8">
+    <script>
+    // This function will two paramaters, and immediatly return another function
+        function makeConverterFunction(multiplier, term) {
+            // Returning function will have its own parameter
+            return function(input) {
+                var convertedValue = input * multiplier;
+                convertedValue = convertedValue.toFixed(2);
+                return convertedValue + " " + term;
+            };
+        }
+
+    // Let's call out parent function with two paramaters and pass it to a variable
+    // That last variable is also a function, our child function
+    // ***** Check the output in your brower's console.log ********
+
+    // This will convert miles to kilometers
+    var milesToKilometers = makeConverterFunction(1.62, "km");
+    console.log("7 miles is " + milesToKilometers(7));
+
+    // This will convert Euro to Canadian
+    var EuroToCanadian = makeConverterFunction(1.8, "CAD")
+    console.log("700 euro is " + EuroToCanadian(700));
+
+    // This will convert meter to centimeter
+    var meterToCentimeter = makeConverterFunction(100, "CM");
+    console.log("1 meter is " + meterToCentimeter(1));
+
+    </script>
+</head>
+<body>
+    <!--This will display the function result on the html page. But has the function has to be below
+    the div to avoid DOM issues -->
+        <div> 
+            <p>10 kilometers is: <span id="kilo"></span></p>
+        </div>
+        
+    <!-- Script for the above div-->
+    <script>
+         function makeConverterFunction(multiplier, term) {
+            // Returning function will have its own parameter
+            return function(input) {
+                var convertedValue = input * multiplier;
+                convertedValue = convertedValue.toFixed(2);
+                return convertedValue + " " + term;
+            };
+        }
+     var kilometersToMiles = makeConverterFunction(0.6214, "miles");
+    document.getElementById("kilo").innerHTML = kilometersToMiles(15);
+    </script>
+</body>
+</html>
